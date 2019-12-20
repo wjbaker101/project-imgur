@@ -201,6 +201,7 @@
             display: grid;
             grid-gap: 1rem;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            align-items: start;
             overflow-y: auto;
 
             &.is-select-cover-mode {
