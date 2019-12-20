@@ -126,7 +126,7 @@ export const ImgurClient = {
             albumID: string,
             title: string,
             description: string):
-            Promise<ICreatedAlbum | Error> {
+            Promise<IImgurImage | Error> {
 
         const auth = appState.auth;
 
@@ -134,7 +134,7 @@ export const ImgurClient = {
             return new Error('User has not been authenticated.');
         }
 
-        const response: AxiosResponse<IResponseEntity<ICreatedAlbum>>
+        const response: AxiosResponse<IResponseEntity<IImgurImage>>
                 = await API.post('/image', {
                     imageData,
                     albumID,

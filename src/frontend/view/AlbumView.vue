@@ -1,13 +1,18 @@
 <template>
     <div class="album-view">
-        <div class="images-container" :class="{ 'is-select-cover-mode': isSelectCoverImageMode }">
-            <ImageComponent
-                    :key="index"
-                    v-for="(image, index) in album.images"
-                    :class="{ 'is-cover': album.coverImageID === image.id }"
-                    :image="image"
-                    @click.native="onImageClick(image)" />
-        </div>
+        <DropZoneComponent
+                class="images-container"
+                :class="{ 'is-select-cover-mode': isSelectCoverImageMode }"
+                @drop="onImageUpload">
+            <div class="images-list">
+                <ImageComponent
+                        :key="index"
+                        v-for="(image, index) in album.images"
+                        :class="{ 'is-cover': album.coverImageID === image.id }"
+                        :image="image"
+                        @click.native="onImageClick(image)" />
+            </div>
+        </DropZoneComponent>
         <div class="controls-container">
             <div class="album-id">
                 <strong>{{ album.id }}</strong>
@@ -39,6 +44,7 @@
     import { IImgurAlbum } from '@common/interface/IImgurAlbum';
 
     import ImageComponent from '@frontend/component/ImageComponent.vue';
+    import DropZoneComponent from '@frontend/component/DropZoneComponent.vue';
 
     import CloseIcon from '@frontend/assets/icon/times.svg';
 
@@ -52,6 +58,7 @@
 
         components: {
             ImageComponent,
+            DropZoneComponent,
             CloseIcon,
         },
 
@@ -186,6 +193,33 @@
 
                 loadedImage.src = nextImage.link;
             },
+
+            async onImageUpload(imageURL: string): Promise<void> {
+                const result = await ImgurClient.uploadImageByURL(imageURL, this.album.id, '', '');
+
+                if (result instanceof Error) {
+                    return;
+                }
+
+                this.album.images.push(result);
+                this.album.length++;
+
+                if (appState.albums) {
+                    const album = appState.albums.albums
+                            .find(a => a.id === this.album.id);
+
+                    if (album) {
+                        if (album.images) {
+                            album.images.push(result);
+                            album.length++;
+                        }
+                        else {
+                            album.images = [result];
+                            album.length = 1;
+                        }
+                    }
+                }
+            },
         },
     })
 </script>
@@ -196,13 +230,16 @@
         flex-direction: column;
 
         .images-container {
-            padding: 1rem;
+            position: relative;
             height: 100%;
-            display: grid;
-            grid-gap: 1rem;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             align-items: start;
             overflow-y: auto;
+
+            &.is-drag {
+                & > * {
+                    pointer-events: none;
+                }
+            }
 
             &.is-select-cover-mode {
                 & > * {
@@ -215,6 +252,22 @@
                     }
                 }
             }
+
+            .image-upload-container {
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                z-index: -1;
+            }
+        }
+
+        .images-list {
+            display: grid;
+            padding: 1rem;
+            grid-gap: 1rem;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
         }
 
         .controls-container {
