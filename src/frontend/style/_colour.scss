@@ -10,6 +10,8 @@ $colours: (
     primary-light: #a3ffc7,
     primary: #0df566,
     primary-dark: #11ac4c,
+
+    danger: #ac0d0d,
 );
 
 @function theme($colour) {

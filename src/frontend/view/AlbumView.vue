@@ -9,11 +9,16 @@
                     @click.native="onImageClick(image)" />
         </div>
         <div class="controls-container">
-            <span class="album-id">
+            <div class="album-id">
                 <strong>{{ album.id }}</strong>
                 <span class="image-count">{{ album.length }}</span>
-            </span>
-            <span class="control-link" @click="isSelectCoverImageMode = !isSelectCoverImageMode">Change Cover Image</span>
+            </div>
+            <div class="controls">
+                <span class="control-link" @click="isSelectCoverImageMode = !isSelectCoverImageMode">Change Cover Image</span>
+            </div>
+            <div class="delete-album">
+                Delete Album
+            </div>
         </div>
         <div class="preview-container" :class="{ 'is-shown': isPreviewImageShown }" @click.self="togglePreview(false)">
             <div class="close-preview" @click.self="togglePreview(false)" @keyup="onKeyUp">
@@ -212,20 +217,28 @@
         }
 
         .controls-container {
+            display: flex;
             padding: 1rem;
             border-top: 4px double theme(bg-light);
 
             & > * {
+                flex: 0 0 auto;
                 display: inline-block;
 
                 & + * {
                     margin-left: 1rem;
+                    padding-left: 1rem;
+                    border-left: 1px solid theme(bg-light);
                 }
             }
 
-            .album-id {
-                padding-right: 1rem;
-                border-right: 1px solid theme(bg-light);
+            .controls {
+                flex: 1;
+            }
+
+            .delete-album {
+                color: theme(danger);
+                cursor: pointer;
             }
 
             .image-count {
