@@ -9,6 +9,10 @@
                     @click.native="onImageClick(image)" />
         </div>
         <div class="controls-container">
+            <span class="album-id">
+                <strong>{{ album.id }}</strong>
+                <span class="image-count">{{ album.length }}</span>
+            </span>
             <span class="control-link" @click="isSelectCoverImageMode = !isSelectCoverImageMode">Change Cover Image</span>
         </div>
         <div class="preview-container" :class="{ 'is-shown': isPreviewImageShown }" @click.self="togglePreview(false)">
@@ -83,8 +87,6 @@
             this.album = album;
 
             appState.setAlbum(this.album);
-
-            console.log(this.album);
         },
 
         methods: {
@@ -96,6 +98,15 @@
                     if (result === true) {
                         this.album.coverImageID = image.id;
                         this.isSelectCoverImageMode = false;
+
+                        if (appState.albums) {
+                            const album = appState.albums.albums
+                                    .find(a => a.id === this.album.id);
+
+                            if (album) {
+                                album.coverImageID = image.id;
+                            }
+                        }
                     }
                 }
                 else {
@@ -203,6 +214,26 @@
         .controls-container {
             padding: 1rem;
             border-top: 4px double theme(bg-light);
+
+            & > * {
+                display: inline-block;
+
+                & + * {
+                    margin-left: 1rem;
+                }
+            }
+
+            .album-id {
+                padding-right: 1rem;
+                border-right: 1px solid theme(bg-light);
+            }
+
+            .image-count {
+                display: inline-block;
+                padding: 0 0.5rem;
+                background-color: theme(bg-light);
+                margin-left: 0.5rem;
+            }
 
             .control-link {
                 color: theme(primary);
