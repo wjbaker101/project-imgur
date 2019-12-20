@@ -15,7 +15,7 @@
         </DropZoneComponent>
         <div class="controls-container">
             <div class="album-id">
-                <strong>{{ album.id }}</strong>
+                <strong>{{ album.title }}</strong>
                 <span class="image-count">{{ album.length }}</span>
             </div>
             <div class="controls">
