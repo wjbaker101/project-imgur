@@ -1,0 +1,16 @@
+export interface IImgurImage {
+    id: string,
+    title: string,
+    description: string,
+    creationDate: number,
+    type: string,
+    animated: boolean,
+    width: number,
+    height: number,
+    size: number,
+    views: number,
+    deletehash: string,
+    link: string,
+    favourite: boolean,
+    nsfw: boolean,
+}

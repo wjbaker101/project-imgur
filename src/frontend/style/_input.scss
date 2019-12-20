@@ -1,0 +1,14 @@
+input[type=text] {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    background-color: theme(bg-light);
+    border: 4px double theme(bg-dark);
+    color: theme(white);
+    font: inherit;
+    letter-spacing: inherit;
+    transition: border-color 0.5s;
+
+    &:focus {
+        border-color: theme(primary);
+    }
+}

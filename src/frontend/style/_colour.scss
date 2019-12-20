@@ -1,0 +1,17 @@
+$colours: (
+    white: #efefef,
+
+    grey: #ddd,
+
+    bg-light: #203336,
+    bg: #172629,
+    bg-dark: #111b1d,
+
+    primary-light: #a3ffc7,
+    primary: #0df566,
+    primary-dark: #11ac4c,
+);
+
+@function theme($colour) {
+    @return map-get($colours, $colour);
+}

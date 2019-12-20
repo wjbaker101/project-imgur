@@ -1,0 +1,7 @@
+{
+    "backend": {
+        "port": 8088,
+        "prefix": "/api",
+        "isLoggingEnabled": true
+    }
+}

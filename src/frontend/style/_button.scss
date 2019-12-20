@@ -1,0 +1,15 @@
+button {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    line-height: 1em;
+    background-color: theme(bg-light);
+    color: theme(white);
+    border: 4px double theme(primary);
+    font: inherit;
+    letter-spacing: inherit;
+    cursor: pointer;
+
+    &:hover {
+        background-color: theme(bg);
+    }
+}
