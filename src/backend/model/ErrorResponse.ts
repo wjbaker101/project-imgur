@@ -1,13 +1,11 @@
 import IErrorResponse from '../interface/IErrorResponse';
 
-class ErrorResponse {
+export const ErrorResponse = {
 
-    public create = (message: string): IErrorResponse => {
+    create(message: string): IErrorResponse {
         return {
             message,
             timestamp: Date.now(),
         }
-    }
+    },
 }
-
-export default new ErrorResponse();

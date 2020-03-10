@@ -1,9 +1,9 @@
 import { Response } from 'express';
 
-import ErrorResponse from '../model/ErrorResponse';
-import ResponseEntity from '../model/ResponseEntity';
+import { ErrorResponse } from '../model/ErrorResponse';
+import { ResponseEntity } from '../model/ResponseEntity';
 
-export default (response: Response) => ({
+export const ResponseHelper = (response: Response) => ({
 
     sendError(status: number, message: string): Response {
         const error = ErrorResponse.create(message);

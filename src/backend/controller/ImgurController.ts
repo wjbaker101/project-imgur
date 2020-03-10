@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 
 import { ImgurService } from '../service/ImgurService'
-import ResponseHelper from '../helper/ResponseHelper';
+import { ResponseHelper } from '../helper/ResponseHelper';
 
 export const ImgurController = {
 

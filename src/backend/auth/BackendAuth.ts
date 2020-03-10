@@ -1,23 +1,23 @@
 import { Request, Response, NextFunction } from 'express';
 
 import configSecret from '../../common/config/config-secret.json';
-import LoggingUtils from '../util/LoggingUtils';
-import ResponseHelper from '../helper/ResponseHelper';
+import { LoggingUtils } from '../util/LoggingUtils';
+import { ResponseHelper } from '../helper/ResponseHelper';
 
 const MESSAGE_ERROR_AUTH = 'Sorry, you are not authenticated to make this request.';
 
-class BackendAuth {
+export const BackendAuth = {
 
-    public isAuthenticated = (request: Request): boolean => {
+    isAuthenticated(request: Request): boolean {
         return request.header('API-Key') === configSecret.backend.apiKey;
-    }
+    },
 
-    public authenticate = (
+    authenticate(
         request: Request,
         response: Response,
-        next: NextFunction): void => {
+        next: NextFunction): void {
 
-        if (this.isAuthenticated(request)) {
+        if (request.header('API-Key') === configSecret.backend.apiKey) {
             next();
             return;
         }
@@ -25,7 +25,5 @@ class BackendAuth {
         LoggingUtils.log('Authentication request failed');
 
         ResponseHelper(response).sendError(403, MESSAGE_ERROR_AUTH);
-    }
+    },
 }
-
-export default new BackendAuth();

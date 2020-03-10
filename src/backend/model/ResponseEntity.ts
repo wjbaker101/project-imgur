@@ -1,13 +1,11 @@
 import { IResponseEntity } from '../../common/interface/IResponseEntity';
 
-class ResponseEntity {
+export const ResponseEntity = {
 
-    public create = (result: any): IResponseEntity => {
+    create(result: any): IResponseEntity {
         return {
             result,
             timestamp: Date.now(),
         }
-    }
+    },
 }
-
-export default new ResponseEntity();

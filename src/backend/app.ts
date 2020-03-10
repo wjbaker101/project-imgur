@@ -4,9 +4,9 @@ import express, { Router } from 'express';
 import bodyParser from 'body-parser';
 import history from 'connect-history-api-fallback';
 
-import LoggingUtils from './util/LoggingUtils';
+import { LoggingUtils } from './util/LoggingUtils';
 import config from '../common/config/config.json';
-import BackendAuth from './auth/BackendAuth';
+import { BackendAuth } from './auth/BackendAuth';
 
 import LogRouter from './router/LogRouter';
 import ImgurRouter from './router/ImgurRouter';

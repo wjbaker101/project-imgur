@@ -3,15 +3,13 @@ import dateformat from 'dateformat';
 
 const DATE_FORMAT = 'ddd dS mmm yyyy, HH:MM:ss:l';
 
-class LoggingUtils {
+export const LoggingUtils = {
 
-    log(message: string) {
+    log(message: string): void {
         if (config.backend.isLoggingEnabled) {
             const date = dateformat(new Date(), DATE_FORMAT);
 
             console.log(`[${date}] - ${message}`);
         }
-    }
+    },
 }
-
-export default new LoggingUtils();
