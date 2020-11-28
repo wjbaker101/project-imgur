@@ -7,9 +7,10 @@
             <div class="images-list">
                 <ImageComponent
                         :key="index"
-                        v-for="(image, index) in album.images"
+                        v-for="(image, index) in displayImages"
                         :class="{ 'is-cover': album.coverImageID === image.id }"
                         :image="image"
+                        @edit="onImageEditDescription"
                         @click.native="onImageClick(image)" />
             </div>
         </DropZoneComponent>
@@ -24,6 +25,13 @@
             <div class="delete-album">
                 Delete Album
             </div>
+        </div>
+        <div class="edit-image-description" v-if="editedImage !== null">
+            <h2>Edit Description</h2>
+            <textarea @keyup.stop="" v-model="editedDescription"></textarea>
+            <p>
+                <button @click="onEditSubmit">Make Changes</button>
+            </p>
         </div>
         <div class="preview-container" :class="{ 'is-shown': isPreviewImageShown }" @click.self="togglePreview(false)">
             <div class="close-preview" @click.self="togglePreview(false)" @keyup="onKeyUp">
@@ -62,6 +70,22 @@
             CloseIcon,
         },
 
+        computed: {
+            displayImages(): IImgurImage[] {
+                const album: IImgurAlbum = this.album;
+
+                if (!album || !album.images) {
+                    return [];
+                }
+
+                return album.images
+                        .filter(i => (
+                            i.description !== null
+                                    && i.description.indexOf('#heels') > 0
+                        ));
+            },
+        },
+
         data() {
             return {
                 album: {},
@@ -70,6 +94,8 @@
                 selectedIndex: null as (number | null),
                 isSlideshowEnabled: false,
                 isSelectCoverImageMode: false,
+                editedImage: null,
+                editedDescription: '',
             }
         },
 
@@ -173,9 +199,9 @@
             },
 
             doSlideshow(): void {
-                const randomIndex = Math.floor(Math.random() * this.album.images.length);
+                const randomIndex = Math.floor(Math.random() * this.displayImages.length);
 
-                const nextImage = this.album.images[randomIndex];
+                const nextImage = this.displayImages[randomIndex];
 
                 const loadedImage = new Image();
 
@@ -218,6 +244,23 @@
                             album.length = 1;
                         }
                     }
+                }
+            },
+
+            onImageEditDescription(image: IImgurImage): void {
+                this.editedImage = image;
+                this.editedDescription = this.editedImage.description || '';
+            },
+
+            async onEditSubmit() {
+                try {
+                    await ImgurClient.updateImageDescription(this.editedImage.id, this.editedDescription);
+
+                    this.editedImage.description = this.editedDescription;
+                    this.editedImage = null;
+                }
+                catch (exception) {
+                    console.log(exception);
                 }
             },
         },
@@ -310,6 +353,20 @@
                 &:hover {
                     color: theme(primary-dark);
                 }
+            }
+        }
+
+        .edit-image-description {
+            padding: 1rem;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background-color: theme(bg-dark);
+            border: 4px double theme(bg-light);
+
+            textarea {
+                width: 350px;
+                min-height: 6rem;
             }
         }
 

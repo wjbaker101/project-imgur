@@ -1,5 +1,8 @@
 <template>
     <div class="image-component" :class="{ 'is-loaded': isLoaded }">
+        <div class="edit-description" @click.stop="onEditClick">
+            Edit
+        </div>
         <img :src="imageURL">
     </div>
 </template>
@@ -51,6 +54,10 @@
 
                 loadedImage.src = ImgurClient.getImageThumbnailLarge(this.image.id);
             },
+
+            onEditClick() {
+                this.$emit('edit', this.image);
+            },
         },
 
         destroyed() {
@@ -64,6 +71,7 @@
         height: 250px;
         padding: 0.5rem;
         display: flex;
+        position: relative;
         border: 4px double theme(bg-light);
         opacity: 0;
         cursor: zoom-in;
@@ -78,6 +86,21 @@
 
         &:hover {
             border-color: theme(primary);
+
+            .edit-description {
+                opacity: 1;
+            }
+        }
+
+        .edit-description {
+            padding: 0 0.5rem;
+            background-color: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: absolute;
+            top: 0;
+            right: 0;
+            cursor: pointer;
+            opacity: 0;
         }
 
         img {

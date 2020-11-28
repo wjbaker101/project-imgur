@@ -11,5 +11,6 @@ router.get('/album/:albumID', ImgurController.getAlbum);
 router.get('/album/:albumID/images', ImgurController.getAlbumImages);
 
 router.post('/image', ImgurController.uploadImageByURL);
+router.put('/image/:imageID', ImgurController.updateImageDescription);
 
 export default router;

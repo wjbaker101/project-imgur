@@ -146,6 +146,26 @@ export const ImgurClient = {
         return response.data.result;
     },
 
+    async updateImageDescription(
+            imageID: string,
+            description: string):
+            Promise<IImgurImage | Error> {
+
+        const auth = appState.auth;
+
+        if (auth === null) {
+            return new Error('User has not been authenticated.');
+        }
+
+        const response: AxiosResponse<IResponseEntity<IImgurImage>>
+                = await API.put(`/image/${imageID}`, {
+                    description,
+                    accessToken: auth.accessToken,
+                });
+
+        return response.data.result;
+    },
+
     getImage(imageID: string): string {
         return `https://i.imgur.com/${imageID}.jpg`;
     },

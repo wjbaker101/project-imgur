@@ -121,4 +121,28 @@ export const ImgurController = {
 
         ResponseHelper(response).sendEntity(200, result);
     },
+
+    async updateImageDescription(request: Request, response: Response):
+            Promise<void> {
+
+        const { imageID } = request.params;
+
+        const {
+            description,
+            accessToken,
+        } = request.body;
+
+        const result = await ImgurService.updateImageDescription(
+            imageID,
+            description,
+            accessToken);
+
+        if (result instanceof Error) {
+            ResponseHelper(response).sendError(400, result.message);
+
+            return;
+        }
+
+        ResponseHelper(response).sendEntity(200, result);
+    },
 }

@@ -176,4 +176,31 @@ export const ImgurClient = {
             return new Error('Unable to create album.');
         }
     },
+
+    async updateImageDescription(
+            imageID: string,
+            description: string,
+            accessToken: string):
+            Promise<IImgurResponse<IImgurImageResponse> | Error> {
+
+        try {
+            console.log(imageID);
+            console.log(description);
+            const formData = new FormData();
+            formData.append('description', description);
+
+            const result = await imgurAPI.post(`/image/${imageID}`, formData, {
+                headers: {
+                    ...formData.getHeaders(),
+                    Authorization: `Bearer ${accessToken}`,
+                },
+            });
+
+            return result.data;
+        }
+        catch (e) {
+            console.log(e)
+            return new Error('Unable to update image description.');
+        }
+    },
 }

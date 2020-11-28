@@ -112,5 +112,22 @@ export const ImgurService = {
         }
 
         return ImgurImageMapper.map(result.data);
-    }
+    },
+
+    async updateImageDescription(
+            imageID: string,
+            description: string,
+            accessToken: string): Promise<IImgurImage | Error> {
+
+        const result = await ImgurClient.updateImageDescription(
+                imageID,
+                description,
+                accessToken);
+
+        if (result instanceof Error) {
+            return result;
+        }
+
+        return ImgurImageMapper.map(result.data);
+    },
 }
