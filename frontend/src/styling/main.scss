@@ -1,0 +1,15 @@
+@use '@/styling/variables' as *;
+
+.bordered {
+    border: 4px double $primary-dark;
+    border-radius: $border-radius;
+
+    &.hoverable {
+        outline: 2px solid transparent;
+        outline-offset: -3px;
+
+        &:hover {
+            outline: 2px solid $primary-dark;
+        }
+    }
+}
