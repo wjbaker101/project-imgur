@@ -1,5 +1,10 @@
 import { readonly, ref } from 'vue';
 
+import { useCache } from '@wjb/vue/use/cache.use';
+
+const cache = useCache();
+const authDetailsCacheKey = 'auth-details';
+
 interface IAuthDetails {
     readonly accessToken: string;
     readonly expiresIn: number;
@@ -9,7 +14,7 @@ interface IAuthDetails {
     readonly accountId: number;
 }
 
-const authDetails = ref<IAuthDetails | null>(null);
+const authDetails = ref<IAuthDetails | null>(cache.get(authDetailsCacheKey));
 
 export const useAuth = function () {
     return {
@@ -18,10 +23,14 @@ export const useAuth = function () {
 
         set(newAuthDetails: IAuthDetails): void {
             authDetails.value = newAuthDetails;
+
+            cache.set(authDetailsCacheKey, authDetails.value);
         },
 
         clear(): void {
             authDetails.value = null;
+
+            cache.unset(authDetailsCacheKey);
         },
 
     };

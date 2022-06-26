@@ -8,7 +8,7 @@
     },
     "dependencies": {
         "@wjb/styling": "^1.0.3",
-        "@wjb/vue": "^1.0.14",
+        "@wjb/vue": "^1.0.21",
         "vue": "^3.2.13",
         "vue-router": "^4.0.16"
     },
