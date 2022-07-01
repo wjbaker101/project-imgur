@@ -5,8 +5,8 @@
         <div class="images-container flex gap-small">
             <ImageComponent :key="index" v-for="(i, index) in images" :url="i.url" @click="onClick(i.url)" />
         </div>
+        <ModalComponent :style="'fullscreen'" />
     </div>
-    <ModalComponent :style="'fullscreen'" />
 </template>
 
 <script lang="ts">
@@ -62,4 +62,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
+.albums-view {
+    --wjb_modal-content-background-colour: #222;
+}
 </style>
