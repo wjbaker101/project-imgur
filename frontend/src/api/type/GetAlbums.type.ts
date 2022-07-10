@@ -15,5 +15,5 @@ interface ApiImage {
     id: string;
     doesExist: boolean;
     originalLink: string;
-    thumbnail: string;
+    thumbnailLink: string;
 }
