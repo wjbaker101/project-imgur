@@ -18,12 +18,12 @@ import { useModal } from '@wjb/vue/use/modal.use';
 import LoginZeroStateComponent from '@/component/zero-state/LoginZeroStateComponent.vue';
 import ImageComponent from '@/view/albums/component/ImageComponent.vue';
 import ImageModalComponent from '@/view/albums/component/ImageModalComponent.vue';
+import AlbumComponent from './component/AlbumComponent.vue';
 
 import { api } from '@/api/api';
 import { useAuth } from '@/use/auth.use';
 
 import { IAlbum } from '@/model/Album.model';
-import AlbumComponent from './component/AlbumComponent.vue';
 
 export default defineComponent({
     name: 'AlbumsView',

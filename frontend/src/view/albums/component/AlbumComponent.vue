@@ -1,8 +1,12 @@
 <template>
     <div class="album-component flex-auto bordered hoverable">
         <img v-if="album.coverImage.doesExist" :src="album.coverImage.thumbnailLink">
-        <div v-else>
-            No cover image.
+        <div v-else class="no-cover-image flex">
+            <div class="no-cover-image-inner text-centered flex-auto">
+                <IconComponent icon="image" size="large" />
+                <br>
+                <small>No Cover Image</small>
+            </div>
         </div>
     </div>
 </template>
@@ -32,6 +36,15 @@ defineProps({
         height: auto;
         vertical-align: middle;
         border-radius: $border-radius;
+    }
+
+    .no-cover-image {
+        width: 160px;
+        height: 160px;
+    }
+
+    .no-cover-image-inner {
+        margin: auto;
     }
 }
 </style>
