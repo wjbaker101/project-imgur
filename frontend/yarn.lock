@@ -154,7 +154,12 @@
     chalk "^2.0.0"
     js-tokens "^4.0.0"
 
-"@babel/parser@^7.16.4", "@babel/parser@^7.16.7", "@babel/parser@^7.18.5":
+"@babel/parser@^7.16.4":
+  version "7.18.6"
+  resolved "https://wjb-144953083930.d.codeartifact.eu-west-2.amazonaws.com:443/npm/npm-libs/@babel/parser/-/parser-7.18.6.tgz#845338edecad65ebffef058d3be851f1d28a63bc"
+  integrity sha512-uQVSa9jJUe/G/304lXspfWVpKpK4euFLgGiMQFOCpM/bgcAdeoHwi/OQz23O9GK2osz26ZiXRRV9aV+Yl1O8tw==
+
+"@babel/parser@^7.16.7", "@babel/parser@^7.18.5":
   version "7.18.5"
   resolved "https://wjb-144953083930.d.codeartifact.eu-west-2.amazonaws.com:443/npm/npm-libs/@babel/parser/-/parser-7.18.5.tgz#337062363436a893a2d22faa60be5bb37091c83c"
   integrity sha512-YZWVaglMiplo7v8f1oMQ5ZPQr0vn7HPeZXxXWsxXJRjGVrzUFn9OxFQl1sb5wzfootjA/yChhW84BV+383FSOw==
@@ -858,9 +863,9 @@
   integrity sha512-NlUWlkeU8Sf7nC3s3slfM4vZf9mIMNDRb0XW0MllEWLj9HkB7qxYtDoDWeQO11Z3TmrWokOE1noJqQmQWmAV1w==
 
 "@wjb/vue@^1.0.21":
-  version "1.0.21"
-  resolved "https://wjb-144953083930.d.codeartifact.eu-west-2.amazonaws.com:443/npm/npm-libs/@wjb/vue/-/vue-1.0.21.tgz#8a9189f47402b6b4894a73d1b2780c898d370f47"
-  integrity sha512-cJuhyl6Tzl1Mw4N4LPM6y8KFc4Jno6Jlspz3A9/Sa/gXHHx7faoqbeuwcsLXHmbAUoXYrPFcdwyRfsCx6Qbr7Q==
+  version "1.0.30"
+  resolved "https://wjb-144953083930.d.codeartifact.eu-west-2.amazonaws.com:443/npm/npm-libs/@wjb/vue/-/vue-1.0.30.tgz#b7918d5de0ce12479ac00a23e8f5bbf6b0403ae6"
+  integrity sha512-B+VWbDsHMzrJsbBfkL/SqiadaqbB06HleaiVikLUUqLJvLJYci4TopZxm7nFmmvGR8eFfvPmdKqzrx/b9B6ftA==
   dependencies:
     "@wjb/styling" "^1.0.3"
     vue "^3.2.36"

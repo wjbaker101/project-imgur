@@ -4,22 +4,8 @@
     <div class="flex-auto"></div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-
+<script setup lang="ts">
 import NavComponent from '@/component/NavComponent.vue';
-import LoginZeroStateComponent from '@/component/zero-state/LoginZeroStateComponent.vue';
-
-export default defineComponent({
-    name: 'App',
-
-    components: {
-        NavComponent,
-        LoginZeroStateComponent,
-    },
-
-    setup() {},
-});
 </script>
 
 <style lang="scss">
