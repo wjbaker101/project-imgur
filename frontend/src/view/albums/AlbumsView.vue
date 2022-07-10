@@ -10,7 +10,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, onMounted, ref } from 'vue';
 
 import ModalComponent from '@wjb/vue/component/ModalComponent.vue';
 import { useModal } from '@wjb/vue/use/modal.use';
@@ -19,7 +19,10 @@ import LoginZeroStateComponent from '@/component/zero-state/LoginZeroStateCompon
 import ImageComponent from '@/view/albums/component/ImageComponent.vue';
 import ImageModalComponent from '@/view/albums/component/ImageModalComponent.vue';
 
+import { api } from '@/api/api';
 import { useAuth } from '@/use/auth.use';
+
+import { IAlbum } from '@/model/Album.model';
 
 export default defineComponent({
     name: 'AlbumsView',
@@ -44,6 +47,19 @@ export default defineComponent({
                 url: 'https://i.imgur.com/SuEhwOQb.jpg',
             },
         ];
+
+        const albums = ref<Array<IAlbum> | null>(null);
+
+        onMounted(async () => {
+            albums.value = null;
+
+            const result = await api.getAlbums();
+            if (result instanceof Error)
+                return;
+
+            albums.value = result;
+            console.log(albums.value)
+        });
 
         return {
             authDetails,
