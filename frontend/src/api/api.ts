@@ -2,6 +2,8 @@ import dayjs from 'dayjs';
 
 import { useAuth } from '@/use/auth.use';
 
+import { IApiResponse } from '@/api/type/ApiResponse.type';
+
 import { IAlbum } from '@/model/Album.model';
 import { IGetAlbumsResponse } from '@/api/type/GetAlbums.type';
 
@@ -22,9 +24,9 @@ export const api = {
                 },
             });
 
-            const response = (await rawResponse.json()) as IGetAlbumsResponse;
+            const response = (await rawResponse.json()) as IApiResponse<IGetAlbumsResponse>;
 
-            return response.albums.map(x => ({
+            return response.result.albums.map(x => ({
                 id: x.id,
                 title: x.title,
                 imageCount: x.imageCount,

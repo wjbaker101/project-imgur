@@ -3,7 +3,7 @@
     <div v-else class="albums-view">
         <h2>Albums</h2>
         <div class="images-container flex gap-small">
-            <ImageComponent :key="index" v-for="(i, index) in images" :url="i.url" @click="onClick(i.url)" />
+            <AlbumComponent :key="album.id" v-for="album in albums" :album="album" />
         </div>
         <ModalComponent :style="'fullscreen'" />
     </div>
@@ -23,15 +23,17 @@ import { api } from '@/api/api';
 import { useAuth } from '@/use/auth.use';
 
 import { IAlbum } from '@/model/Album.model';
+import AlbumComponent from './component/AlbumComponent.vue';
 
 export default defineComponent({
     name: 'AlbumsView',
 
     components: {
-        ModalComponent,
-        LoginZeroStateComponent,
-        ImageComponent,
-    },
+    ModalComponent,
+    LoginZeroStateComponent,
+    ImageComponent,
+    AlbumComponent
+},
 
     setup() {
         const auth = useAuth();
@@ -64,6 +66,7 @@ export default defineComponent({
         return {
             authDetails,
             images,
+            albums,
 
             onClick(i: string) {
                 modal.show({
