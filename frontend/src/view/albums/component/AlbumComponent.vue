@@ -1,12 +1,17 @@
 <template>
-    <div class="album-component flex-auto bordered hoverable">
-        <img v-if="album.coverImage.doesExist" :src="album.coverImage.thumbnailLink">
-        <div v-else class="no-cover-image flex">
-            <div class="no-cover-image-inner text-centered flex-auto">
-                <IconComponent icon="image" size="large" />
-                <br>
-                <small>No Cover Image</small>
+    <div class="album-component flex-auto bordered hoverable" :title="album.title">
+        <div>
+            <img v-if="album.coverImage.doesExist" :src="album.coverImage.thumbnailLink">
+            <div v-else class="no-cover-image flex">
+                <div class="no-cover-image-inner text-centered flex-auto">
+                    <IconComponent icon="image" size="large" />
+                    <br>
+                    <small>No Cover Image</small>
+                </div>
             </div>
+        </div>
+        <div class="description flex gap-small">
+            <div class="title">{{ album.title }}</div>
         </div>
     </div>
 </template>
@@ -31,7 +36,9 @@ defineProps({
     padding: 0.5rem;
     cursor: zoom-in;
 
-    & > img {
+    $image-size: 160px;
+
+    img {
         max-width: 100%;
         height: auto;
         vertical-align: middle;
@@ -39,12 +46,22 @@ defineProps({
     }
 
     .no-cover-image {
-        width: 160px;
-        height: 160px;
+        width: $image-size;
+        height: $image-size;
     }
 
     .no-cover-image-inner {
         margin: auto;
+    }
+
+    .description {
+        width: $image-size;
+        margin-top: 0.25rem;
+
+        .title {
+            white-space: pre;
+            overflow-x: hidden;
+        }
     }
 }
 </style>
