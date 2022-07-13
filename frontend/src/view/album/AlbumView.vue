@@ -6,6 +6,7 @@
 </template>
 
 <script setup lang="ts">
+import { api } from '@/api/api';
 import { onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 
@@ -13,7 +14,11 @@ const route = useRoute();
 
 const albumId = route.params.albumId as string;
 
-onMounted(() => {});
+onMounted(async () => {
+    const album = await api.getAlbum(albumId);
+
+    console.log(album)
+});
 </script>
 
 <style lang="scss">

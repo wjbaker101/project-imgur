@@ -6,6 +6,7 @@ import { IApiResponse } from '@/api/type/ApiResponse.type';
 
 import { IAlbum } from '@/model/Album.model';
 import { IGetAlbumsResponse } from '@/api/type/GetAlbums.type';
+import { IGetAlbumResponse } from './type/GetAlbum.type';
 
 const authData = useAuth();
 
@@ -47,7 +48,7 @@ export const api = {
         }
     },
 
-    async getAlbum(albumId: string): Promise<Array<IAlbum> | Error> {
+    async getAlbum(albumId: string): Promise<IAlbum | Error> {
         if (auth.value === null)
             return new Error('Must be logged in to do this.');
 
@@ -58,9 +59,11 @@ export const api = {
                 },
             });
 
-            const response = (await rawResponse.json()) as IApiResponse<IGetAlbumsResponse>;
+            const response = (await rawResponse.json()) as IApiResponse<IGetAlbumResponse>;
 
-            return response.result.albums.map(album => ({
+            const album = response.result.album;
+
+            return {
                 id: album.id,
                 title: album.title,
                 imageCount: album.imageCount,
@@ -88,7 +91,7 @@ export const api = {
                         thumbnailLink: image.image.thumbnailLink,
                     },
                 })) ?? null,
-            }));
+            };
         }
         catch (error) {
             console.log(error);

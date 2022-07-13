@@ -1,19 +1,21 @@
 <template>
-    <div class="album-component flex-auto bordered hoverable" :title="album.title">
-        <div>
-            <img v-if="album.coverImage.doesExist" :src="album.coverImage.thumbnailLink">
-            <div v-else class="no-cover-image flex">
-                <div class="no-cover-image-inner text-centered flex-auto">
-                    <IconComponent icon="image" size="large" />
-                    <br>
-                    <small>No Cover Image</small>
+    <router-link class="image-component flex-auto bordered hoverable" :to="`/album/${album.id}`">
+        <div :title="album.title">
+            <div>
+                <img v-if="album.coverImage.doesExist" :src="album.coverImage.thumbnailLink">
+                <div v-else class="no-cover-image flex">
+                    <div class="no-cover-image-inner text-centered flex-auto">
+                        <IconComponent icon="image" size="large" />
+                        <br>
+                        <small>No Cover Image</small>
+                    </div>
                 </div>
             </div>
+            <div class="description flex gap-small">
+                <div class="title">{{ album.title }}</div>
+            </div>
         </div>
-        <div class="description flex gap-small">
-            <div class="title">{{ album.title }}</div>
-        </div>
-    </div>
+    </router-link>
 </template>
 
 <script setup lang="ts">
