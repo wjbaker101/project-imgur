@@ -10,4 +10,5 @@ public sealed class ImageModel
     public int Height { get; init; }
     public int FileSize { get; init; }
     public string DeleteHash { get; init; } = null!;
+    public ImageLinkModel Image { get; init; } = null!;
 }

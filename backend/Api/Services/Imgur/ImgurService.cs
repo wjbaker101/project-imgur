@@ -65,7 +65,8 @@ public sealed class ImgurService : IImgurService
                     Width = x.Width,
                     Height = x.Height,
                     FileSize = x.FileSize,
-                    DeleteHash = x.DeleteHash
+                    DeleteHash = x.DeleteHash,
+                    Image = new ImageLinkModel(x.Id)
                 })
             }
         };
