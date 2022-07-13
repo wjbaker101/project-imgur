@@ -8,12 +8,25 @@ interface ApiAlbum {
     imageCount: number;
     link: string;
     createdAt: string;
-    coverImage: ApiImage;
+    coverImage: ApiImageLink;
+    images: Array<ApiImage> | null;
 }
 
-interface ApiImage {
+interface ApiImageLink {
     id: string;
     doesExist: boolean;
     originalLink: string;
     thumbnailLink: string;
+}
+
+interface ApiImage {
+    id: string;
+    title: string | null;
+    description: string | null;
+    createdAt: string;
+    width: number;
+    height: number;
+    fileSize: number;
+    deleteHash: string;
+    image: ApiImageLink;
 }

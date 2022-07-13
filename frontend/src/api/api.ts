@@ -38,11 +38,61 @@ export const api = {
                     originalLink: x.coverImage.originalLink,
                     thumbnailLink: x.coverImage.thumbnailLink,
                 },
+                images: null,
             }));
         }
         catch (error) {
             console.log(error);
             return new Error('Failed to retrieve albums, check console for errors.');
+        }
+    },
+
+    async getAlbum(albumId: string): Promise<Array<IAlbum> | Error> {
+        if (auth.value === null)
+            return new Error('Must be logged in to do this.');
+
+        try {
+            const rawResponse = await fetch(`/api/${auth.value.accountUsername}/album/${albumId}`, {
+                headers: {
+                    'access_token': auth.value.accessToken,
+                },
+            });
+
+            const response = (await rawResponse.json()) as IApiResponse<IGetAlbumsResponse>;
+
+            return response.result.albums.map(album => ({
+                id: album.id,
+                title: album.title,
+                imageCount: album.imageCount,
+                link: album.link,
+                createdAt: dayjs(album.createdAt),
+                coverImage: {
+                    id: album.coverImage.id,
+                    doesExist: album.coverImage.doesExist,
+                    originalLink: album.coverImage.originalLink,
+                    thumbnailLink: album.coverImage.thumbnailLink,
+                },
+                images: album.images?.map(image => ({
+                    id: image.id,
+                    title: image.title,
+                    description: image.description,
+                    createdAt: dayjs(image.createdAt),
+                    width: image.width,
+                    height: image.height,
+                    fileSize: image.fileSize,
+                    deleteHash: image.deleteHash,
+                    image: {
+                        id: image.image.id,
+                        doesExist: image.image.doesExist,
+                        originalLink: image.image.originalLink,
+                        thumbnailLink: image.image.thumbnailLink,
+                    },
+                })) ?? null,
+            }));
+        }
+        catch (error) {
+            console.log(error);
+            return new Error(`Failed to retrieve album '${albumId}', check console for errors.`);
         }
     },
 
