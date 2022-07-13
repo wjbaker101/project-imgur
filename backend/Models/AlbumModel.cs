@@ -8,4 +8,5 @@ public sealed class AlbumModel
     public string Link { get; init; } = null!;
     public DateTime CreatedAt { get; init; }
     public ImageLinkModel CoverImage { get; init; } = null!;
+    public List<ImageModel>? Images { get; init; }
 }

@@ -7,6 +7,7 @@ namespace Api.Clients.Imgur;
 public interface IImgurClient
 {
     Result<List<ImgurApiAlbum>> GetAlbums(string accessToken, string username, int page);
+    Result<ImgurApiAlbum> GetAlbum(string accessToken, string username, string albumId);
 }
 
 public sealed class ImgurClient : IImgurClient
@@ -38,6 +39,22 @@ public sealed class ImgurClient : IImgurClient
 
         if (response == null)
             return Result<List<ImgurApiAlbum>>.Failure("Unable to retrieve albums from Imgur.");
+
+        return response.Data;
+    }
+
+    public Result<ImgurApiAlbum> GetAlbum(string accessToken, string username, string albumId)
+    {
+        var request = CreateRequest(HttpMethod.Get, $"account/{username}/album/{albumId}", accessToken);
+
+        var rawResponse = _httpClient
+            .SendAsync(request).Result.Content;
+
+        var response = rawResponse
+            .ReadFromJsonAsync<ImgurBaseResponse<ImgurApiAlbum>>().Result;
+
+        if (response == null)
+            return Result<ImgurApiAlbum>.Failure($"Unable to retrieve album '{albumId}' from Imgur.");
 
         return response.Data;
     }

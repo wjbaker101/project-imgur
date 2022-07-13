@@ -8,6 +8,7 @@ namespace Api.Services.Imgur;
 public interface IImgurService
 {
     Result<GetAlbumsResponse> GetAlbums(string username, string accessToken);
+    Result<GetAlbumResponse> GetAlbum(string username, string albumId, string accessToken);
 }
 
 public sealed class ImgurService : IImgurService
@@ -36,6 +37,37 @@ public sealed class ImgurService : IImgurService
                 Link = x.Link,
                 CoverImage = new ImageLinkModel(x.CoverImageId)
             })
+        };
+    }
+
+    public Result<GetAlbumResponse> GetAlbum(string username, string albumId, string accessToken)
+    {
+        var albumResult = _imgurClient.GetAlbum(accessToken, username, albumId);
+        if (!albumResult.TrySuccess(out var album))
+            return Result<GetAlbumResponse>.FromFailure(albumResult);
+
+        return new GetAlbumResponse
+        {
+            Album = new AlbumModel
+            {
+                Id = album.Id,
+                Title = album.Title,
+                CreatedAt = DateTimeOffset.FromUnixTimeSeconds(album.CreatedAt).DateTime,
+                ImageCount = album.ImageCount,
+                Link = album.Link,
+                CoverImage = new ImageLinkModel(album.CoverImageId),
+                Images = album.Images?.ConvertAll(x => new ImageModel
+                {
+                    Id = x.Id,
+                    Title = x.Title,
+                    Description = x.Description,
+                    CreatedAt = DateTimeOffset.FromUnixTimeSeconds(x.CreatedAt).DateTime,
+                    Width = x.Width,
+                    Height = x.Height,
+                    FileSize = x.FileSize,
+                    DeleteHash = x.DeleteHash
+                })
+            }
         };
     }
 }

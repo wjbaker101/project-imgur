@@ -18,4 +18,6 @@ public sealed class ImgurApiAlbum
 
     [JsonPropertyName("cover")]
     public string? CoverImageId { get; init; }
+
+    public List<ImgurApiImage>? Images { get; init; }
 }
