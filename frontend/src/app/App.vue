@@ -37,4 +37,8 @@ body {
     box-sizing: border-box;
     transition: all 0.2s;
 }
+
+.vertical-align-middle {
+    vertical-align: middle;
+}
 </style>
