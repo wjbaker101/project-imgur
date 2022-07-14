@@ -1,5 +1,5 @@
 <template>
-    <router-link class="image-component flex-auto bordered hoverable" :to="`/album/${album.id}`">
+    <router-link class="album-component flex-auto bordered hoverable" :to="`/album/${album.id}`">
         <div :title="album.title">
             <div>
                 <img v-if="album.coverImage.doesExist" :src="album.coverImage.thumbnailLink">
@@ -37,6 +37,8 @@ defineProps({
 .album-component {
     padding: 0.5rem;
     cursor: zoom-in;
+    color: inherit;
+    text-decoration: none;
 
     $image-size: 160px;
 
