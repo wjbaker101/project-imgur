@@ -36,7 +36,6 @@ defineProps({
 
 .album-component {
     padding: 0.5rem;
-    cursor: zoom-in;
     color: inherit;
     text-decoration: none;
 
