@@ -8,13 +8,10 @@
     </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, onMounted, ref } from 'vue';
-
-import ModalComponent from '@wjb/vue/component/ModalComponent.vue';
+<script setup lang="ts">
+import { onMounted, ref } from 'vue';
 
 import LoginZeroStateComponent from '@/component/zero-state/LoginZeroStateComponent.vue';
-import ImageComponent from '@/view/albums/component/ImageComponent.vue';
 import AlbumComponent from '@/view/albums/component/AlbumComponent.vue';
 
 import { api } from '@/api/api';
@@ -22,38 +19,20 @@ import { useAuth } from '@/use/auth.use';
 
 import { IAlbum } from '@/model/Album.model';
 
-export default defineComponent({
-    name: 'AlbumsView',
+const auth = useAuth();
 
-    components: {
-        ModalComponent,
-        LoginZeroStateComponent,
-        ImageComponent,
-        AlbumComponent,
-    },
+const authDetails = auth.value;
 
-    setup() {
-        const auth = useAuth();
+const albums = ref<Array<IAlbum> | null>(null);
 
-        const authDetails = auth.value;
+onMounted(async () => {
+    albums.value = null;
 
-        const albums = ref<Array<IAlbum> | null>(null);
+    const result = await api.getAlbums();
+    if (result instanceof Error)
+        return;
 
-        onMounted(async () => {
-            albums.value = null;
-
-            const result = await api.getAlbums();
-            if (result instanceof Error)
-                return;
-
-            albums.value = result;
-        });
-
-        return {
-            authDetails,
-            albums,
-        };
-    },
+    albums.value = result;
 });
 </script>
 
