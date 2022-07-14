@@ -4,7 +4,7 @@
             <span v-if="album === null">Loading album...</span>
             <span v-else>{{ album.title }}</span>
         </h1>
-        <div v-if="album !== null" class="images-container flex flex-wrap">
+        <div v-if="album !== null" class="images-container gap-small flex flex-wrap">
             <AlbumImageComponent :key="image.id" v-for="image in album.images" :image="image" />
         </div>
     </div>
