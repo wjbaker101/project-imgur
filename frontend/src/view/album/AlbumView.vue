@@ -1,9 +1,14 @@
 <template>
     <div class="album-view">
-        <h1 class="flex-auto align-items-center">
-            <span v-if="album === null">Loading album...</span>
-            <span v-else>{{ album.title }}</span>
-        </h1>
+        <div class="flex align-items-center">
+            <router-link class="back-to-albums flex-auto" to="/">
+                <IconComponent icon="arrow-left" />
+            </router-link>
+            <h1 class="flex-auto align-items-center">
+                <span v-if="album === null">Loading album...</span>
+                <span v-else>{{ album.title }}</span>
+            </h1>
+        </div>
         <div v-if="album !== null" class="images-container gap-small flex flex-wrap">
             <AlbumImageComponent :key="image.id" v-for="image in album.images" :image="image" />
         </div>
@@ -36,7 +41,20 @@ onMounted(async () => {
 </script>
 
 <style lang="scss">
+@use '@/styling/variables' as *;
+
 .album-view {
+
+    .back-to-albums {
+        padding: 0.5rem;
+        cursor: pointer;
+        line-height: 1em;
+        color: inherit;
+
+        &:hover {
+            color: $primary;
+        }
+    }
 
     .images-container {
         flex-wrap: wrap;

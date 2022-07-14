@@ -155,9 +155,9 @@
     js-tokens "^4.0.0"
 
 "@babel/parser@^7.16.4":
-  version "7.18.6"
-  resolved "https://wjb-144953083930.d.codeartifact.eu-west-2.amazonaws.com:443/npm/npm-libs/@babel/parser/-/parser-7.18.6.tgz#845338edecad65ebffef058d3be851f1d28a63bc"
-  integrity sha512-uQVSa9jJUe/G/304lXspfWVpKpK4euFLgGiMQFOCpM/bgcAdeoHwi/OQz23O9GK2osz26ZiXRRV9aV+Yl1O8tw==
+  version "7.18.8"
+  resolved "https://wjb-144953083930.d.codeartifact.eu-west-2.amazonaws.com:443/npm/npm-libs/@babel/parser/-/parser-7.18.8.tgz#822146080ac9c62dac0823bb3489622e0bc1cbdf"
+  integrity sha512-RSKRfYX20dyH+elbJK2uqAkVyucL+xXzhqlMD5/ZXx+dAAwpyB7HsvnHe/ZUGOF+xLr5Wx9/JoXVTj6BQE2/oA==
 
 "@babel/parser@^7.16.7", "@babel/parser@^7.18.5":
   version "7.18.5"
@@ -863,9 +863,9 @@
   integrity sha512-NlUWlkeU8Sf7nC3s3slfM4vZf9mIMNDRb0XW0MllEWLj9HkB7qxYtDoDWeQO11Z3TmrWokOE1noJqQmQWmAV1w==
 
 "@wjb/vue@^1.0.21":
-  version "1.0.30"
-  resolved "https://wjb-144953083930.d.codeartifact.eu-west-2.amazonaws.com:443/npm/npm-libs/@wjb/vue/-/vue-1.0.30.tgz#b7918d5de0ce12479ac00a23e8f5bbf6b0403ae6"
-  integrity sha512-B+VWbDsHMzrJsbBfkL/SqiadaqbB06HleaiVikLUUqLJvLJYci4TopZxm7nFmmvGR8eFfvPmdKqzrx/b9B6ftA==
+  version "1.0.36"
+  resolved "https://wjb-144953083930.d.codeartifact.eu-west-2.amazonaws.com:443/npm/npm-libs/@wjb/vue/-/vue-1.0.36.tgz#534f5468b8bf40ccf3be681c05ed732132590229"
+  integrity sha512-g2ZXY0m/iqNWRFHkH0uuRL3SxwTd5AOyaCoBfb4RtDm/7qmg4hbX839g7z38mYZo3oDqlVevzylQcKTWKbImIQ==
   dependencies:
     "@wjb/styling" "^1.0.3"
     vue "^3.2.36"
