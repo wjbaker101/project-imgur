@@ -2,7 +2,7 @@
     <LoginZeroStateComponent v-if="authDetails === null" />
     <div v-else class="albums-view">
         <h2>Albums</h2>
-        <div class="images-container flex gap-small">
+        <div class="albums-container flex gap-small">
             <AlbumComponent :key="album.id" v-for="album in albums" :album="album" />
         </div>
     </div>
@@ -37,5 +37,10 @@ onMounted(async () => {
 </script>
 
 <style lang="scss">
-.albums-view {}
+.albums-view {
+
+    .albums-container {
+        flex-wrap: wrap;
+    }
+}
 </style>
