@@ -29,11 +29,11 @@ export default defineComponent({
     name: 'AlbumsView',
 
     components: {
-    ModalComponent,
-    LoginZeroStateComponent,
-    ImageComponent,
-    AlbumComponent
-},
+        ModalComponent,
+        LoginZeroStateComponent,
+        ImageComponent,
+        AlbumComponent,
+    },
 
     setup() {
         const auth = useAuth();
@@ -73,7 +73,6 @@ export default defineComponent({
                     component: ImageModalComponent,
                     componentProps: {},
                 });
-                // useImageModal().show();
             },
         };
     },
