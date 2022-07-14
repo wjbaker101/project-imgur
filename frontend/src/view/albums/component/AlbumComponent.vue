@@ -2,7 +2,7 @@
     <router-link class="album-component flex-auto bordered hoverable" :to="`/album/${album.id}`">
         <div :title="album.title">
             <div>
-                <img v-if="album.coverImage.doesExist" :src="album.coverImage.thumbnailLink">
+                <img width="160" height="160" v-if="album.coverImage.doesExist" :src="album.coverImage.thumbnailLink">
                 <div v-else class="no-cover-image flex">
                     <div class="no-cover-image-inner text-centered flex-auto">
                         <IconComponent icon="image" size="large" />

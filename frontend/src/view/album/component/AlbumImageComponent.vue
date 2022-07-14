@@ -1,7 +1,7 @@
 <template>
     <div class="album-image-component flex-auto bordered hoverable" :title="image.title ?? ''">
         <div>
-            <img :src="image.image.thumbnailLink">
+            <img width="160" height="160" :src="image.image.thumbnailLink">
         </div>
     </div>
 </template>
