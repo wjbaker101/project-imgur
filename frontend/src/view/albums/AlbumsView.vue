@@ -1,7 +1,12 @@
 <template>
     <LoginZeroStateComponent v-if="authDetails === null" />
     <div v-else class="albums-view">
-        <h2>Albums</h2>
+        <HeadingComponent title="Albums">
+            <template v-slot:right>
+                <IconComponent icon="image" gap="right" />
+                <span class="vertical-align-middle">{{ albums?.length }}</span>
+            </template>
+        </HeadingComponent>
         <div class="albums-container flex gap-small">
             <AlbumComponent :key="album.id" v-for="album in albums" :album="album" />
         </div>
@@ -13,6 +18,7 @@ import { onMounted, ref } from 'vue';
 
 import LoginZeroStateComponent from '@/component/zero-state/LoginZeroStateComponent.vue';
 import AlbumComponent from '@/view/albums/component/AlbumComponent.vue';
+import HeadingComponent from '@/component/HeadingComponent.vue';
 
 import { api } from '@/api/api';
 import { useAuth } from '@/use/auth.use';
